@@ -4,7 +4,7 @@
 
 - [MariaDB](https://mariadb.org/) >= 5.1
 - [Node Foreman](https://strongloop.github.io/node-foreman/)
-- [Python](https://www.python.org/download/releases/3.4.0/) >= 3.4
+- [Python](https://www.python.org/) >= 3.4
 
 ## Installation
 
