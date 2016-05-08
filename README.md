@@ -12,6 +12,14 @@
 pyvenv venv
 . venv/bin/activate
 pip install -r requirements.txt
+
+mysql -u user -p -h host -P port
+```
+
+```sql
+CREATE DATABASE database;
+USE database;
+source etc/dump.sql;
 ```
 
 ## Configuration
