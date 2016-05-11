@@ -24,10 +24,10 @@ DROP TABLE IF EXISTS `cd_production`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cd_production` (
   `code_cd` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `etaireia` varchar(45) CHARACTER SET greek NOT NULL,
+  `etaireia` varchar(45) CHARACTER SET utf8mb4 NOT NULL,
   `etos` year(4) NOT NULL,
   PRIMARY KEY (`code_cd`)
-) ENGINE=InnoDB AUTO_INCREMENT=670681 DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+) ENGINE=InnoDB AUTO_INCREMENT=670681 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -49,15 +49,15 @@ DROP TABLE IF EXISTS `group_prod`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `group_prod` (
   `cd` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `group` varchar(45) COLLATE latin1_general_cs NOT NULL,
-  `title` varchar(60) CHARACTER SET greek NOT NULL,
+  `group` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(60) CHARACTER SET utf8mb4 NOT NULL,
   PRIMARY KEY (`cd`,`group`,`title`),
   KEY `FK_group_prod_2` (`group`),
   KEY `FK_group_prod_3` (`title`),
   CONSTRAINT `FK_group_prod_1` FOREIGN KEY (`cd`) REFERENCES `cd_production` (`code_cd`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_group_prod_2` FOREIGN KEY (`group`) REFERENCES `sigrotima` (`onoma`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_group_prod_3` FOREIGN KEY (`title`) REFERENCES `tragoudi` (`titlos`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=420491 DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+) ENGINE=InnoDB AUTO_INCREMENT=420491 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -78,12 +78,12 @@ DROP TABLE IF EXISTS `kalitexnis`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `kalitexnis` (
-  `ar_taut` char(8) COLLATE latin1_general_cs NOT NULL,
-  `onoma` varchar(36) CHARACTER SET greek DEFAULT NULL,
-  `epitheto` varchar(45) CHARACTER SET greek NOT NULL,
+  `ar_taut` char(8) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `onoma` varchar(36) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `epitheto` varchar(45) CHARACTER SET utf8mb4 NOT NULL,
   `etos_gen` year(4) DEFAULT NULL,
   PRIMARY KEY (`ar_taut`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -104,10 +104,10 @@ DROP TABLE IF EXISTS `sigrotima`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sigrotima` (
-  `onoma` varchar(45) COLLATE latin1_general_cs NOT NULL,
+  `onoma` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
   `im_dimiourgias` int(10) unsigned NOT NULL,
   PRIMARY KEY (`onoma`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,15 +129,15 @@ DROP TABLE IF EXISTS `singer_prod`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `singer_prod` (
   `cd` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tragoudistis` char(8) COLLATE latin1_general_cs NOT NULL DEFAULT '',
-  `title` varchar(60) CHARACTER SET greek NOT NULL,
+  `tragoudistis` char(8) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `title` varchar(60) CHARACTER SET utf8mb4 NOT NULL,
   PRIMARY KEY (`cd`,`tragoudistis`,`title`),
   KEY `FK_ektelesi_2` (`tragoudistis`),
   KEY `FK_ektelesi_3` (`title`),
   CONSTRAINT `FK_ektelesi_1` FOREIGN KEY (`cd`) REFERENCES `cd_production` (`code_cd`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_ektelesi_2` FOREIGN KEY (`tragoudistis`) REFERENCES `kalitexnis` (`ar_taut`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_ektelesi_3` FOREIGN KEY (`title`) REFERENCES `tragoudi` (`titlos`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=600604 DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+) ENGINE=InnoDB AUTO_INCREMENT=600604 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,16 +158,16 @@ DROP TABLE IF EXISTS `tragoudi`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tragoudi` (
-  `titlos` varchar(60) CHARACTER SET greek NOT NULL,
-  `sinthetis` char(8) COLLATE latin1_general_cs DEFAULT NULL,
+  `titlos` varchar(60) CHARACTER SET utf8mb4 NOT NULL,
+  `sinthetis` char(8) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `etos_par` year(4) DEFAULT NULL,
-  `stixourgos` char(8) COLLATE latin1_general_cs DEFAULT NULL,
+  `stixourgos` char(8) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`titlos`),
   KEY `FK_tragoudi_1` (`sinthetis`),
   KEY `FK_tragoudi_2` (`stixourgos`),
   CONSTRAINT `FK_tragoudi_1` FOREIGN KEY (`sinthetis`) REFERENCES `kalitexnis` (`ar_taut`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `FK_tragoudi_2` FOREIGN KEY (`stixourgos`) REFERENCES `kalitexnis` (`ar_taut`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
