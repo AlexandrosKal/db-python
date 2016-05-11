@@ -39,7 +39,8 @@ nf start
 Change the `run()` call in `app.py` to:
 
 ```python
-run(port=os.environ['PORT'], debug=True, reloader=True)
+run(host='0.0.0.0', port=os.environ.get('PORT', 8080), debug=True,
+    reloader=True)
 ```
 
 ## Authors
