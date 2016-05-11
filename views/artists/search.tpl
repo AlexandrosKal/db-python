@@ -16,13 +16,13 @@
   <div class="form-group">
     <label for="byfrom" class="col-sm-2 control-label">Birth Year - From</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="byfrom id="byfrom"" />
+      <input type="text" class="form-control" name="byfrom" id="byfrom" />
     </div>
   </div>
   <div class="form-group">
     <label for="byfrom" class="col-sm-2 control-label">Birth Year - To</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="byto" id="byto"/>
+      <input type="text" class="form-control" name="byto" id="byto" />
     </div>
   </div>
   <div class="form-group">
