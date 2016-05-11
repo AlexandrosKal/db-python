@@ -34,6 +34,14 @@ echo "DATABASE_URL='mysql://user:password@host:port/database'" >> .env
 nf start
 ```
 
+### Development
+
+Change `Procfile` to:
+
+```sh
+web: python -m bottle --debug --reload app
+```
+
 ## Authors
 
 - Alexandros Kalimeris <kalimerisalx@gmail.com> <sdi1400056@di.uoa.gr>
