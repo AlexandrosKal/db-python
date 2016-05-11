@@ -36,10 +36,10 @@ nf start
 
 ### Development
 
-Change `Procfile` to:
+Change the `run()` call in `app.py` to:
 
-```sh
-web: python -m bottle --debug --reload app
+```python
+run(port=os.environ['PORT'], debug=True, reloader=True)
 ```
 
 ## Authors
