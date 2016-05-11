@@ -16,61 +16,61 @@ def index():
 @get('/artists')
 @view('artists/search')
 def artist_search():
-    return ''
+    return dict()
 
 
 @get('/artists/create')
 @view('artists/create')
 def artist_create():
-    return ''
+    return dict()
 
 
 @post('/artists/create')
 @view('artists/create')
 def artist_do_create():
-    return ''
+    return dict()
 
 
 @get('/artists/list')
 @view('artists/list')
 def artist_list():
-    return ''
+    return dict()
 
 
 @get('/artists/<id:int>')
 @view('artists/update')
 def artist_update(id):
-    return ''
+    return dict()
 
 
 @post('/artists/<id:int>')
 @view('artists/update')
 def artist_do_update(id):
-    return ''
+    return dict()
 
 
 @get('/songs')
 @view('songs/search')
 def song_search():
-    return ''
+    return dict()
 
 
 @get('/songs/create')
 @view('songs/create')
 def song_create():
-    return ''
+    return dict()
 
 
 @post('/songs/create')
 @view('songs/create')
 def song_do_create():
-    return ''
+    return dict()
 
 
 @get('/songs/list')
 @view('songs/list')
 def song_list():
-    return ''
+    return dict()
 
 
 if __name__ == '__main__':
