@@ -10,7 +10,7 @@ def server_static(filepath):
 @get('/')
 @view('index')
 def index():
-    return 'Hello, world!'
+    return dict();
 
 
 @get('/artists')
