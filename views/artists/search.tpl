@@ -14,7 +14,9 @@
     </div>
   </div>
   <div class="form-group">
-    <label for="yearfrom" class="col-sm-2 control-label">Birth Year - From</label>
+    <label for="yearfrom" class="col-sm-2 control-label">
+      Birth Year - From
+    </label>
     <div class="col-sm-10">
       <input type="text" class="form-control" name="yearfrom" id="yearfrom" />
     </div>
