@@ -1,6 +1,6 @@
 % include('header.tpl')
 <h1 class="text-center">Presentation of Artists</h1>
-<form class="form-horizontal">
+<form class="form-horizontal" action="artists/list" method="post">
   <div class="form-group">
     <label for="name" class="col-sm-2 control-label">Name</label>
     <div class="col-sm-10">
@@ -14,15 +14,15 @@
     </div>
   </div>
   <div class="form-group">
-    <label for="byfrom" class="col-sm-2 control-label">Birth Year - From</label>
+    <label for="yearfrom" class="col-sm-2 control-label">Birth Year - From</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="byfrom" id="byfrom" />
+      <input type="text" class="form-control" name="yearfrom" id="yearfrom" />
     </div>
   </div>
   <div class="form-group">
-    <label for="byfrom" class="col-sm-2 control-label">Birth Year - To</label>
+    <label for="yearto" class="col-sm-2 control-label">Birth Year - To</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="byto" id="byto" />
+      <input type="text" class="form-control" name="yearto" id="yearto" />
     </div>
   </div>
   <div class="form-group">
