@@ -73,5 +73,17 @@ def song_list():
     return dict()
 
 
+@get('/songs/<title>')
+@view('songs/update')
+def song_update(title):
+    return dict()
+
+
+@post('/songs/<title>')
+@view('songs/update')
+def song_do_update(title):
+    return dict()
+
+
 if __name__ == '__main__':
     run(host='0.0.0.0', port=os.environ.get('PORT', 8080))
