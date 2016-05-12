@@ -37,7 +37,7 @@
       <div class="radio">
         <label>
           <input type="radio" name="type" value="songwriter" />
-          Song Writer
+          Songwriter
         </label>
       </div>
       <div class="radio">
