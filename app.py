@@ -31,7 +31,7 @@ def artist_do_create():
     return dict()
 
 
-@get('/artists/list')
+@post('/artists/list')
 @view('artists/list')
 def artist_list():
     return dict()
@@ -67,7 +67,7 @@ def song_do_create():
     return dict()
 
 
-@get('/songs/list')
+@post('/songs/list')
 @view('songs/list')
 def song_list():
     return dict()
