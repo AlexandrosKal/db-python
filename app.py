@@ -94,7 +94,13 @@ def artist_do_update(id):
 @get('/songs')
 @view('songs/search')
 def song_search():
-    return dict()
+    return {'results': None}
+
+
+@post('/songs/search')
+@view('songs/search')
+def song_do_search():
+    return {'results': 'test'}
 
 
 @get('/songs/create')
@@ -106,12 +112,6 @@ def song_create():
 @post('/songs/create')
 @view('songs/create')
 def song_do_create():
-    return dict()
-
-
-@post('/songs/list')
-@view('songs/list')
-def song_list():
     return dict()
 
 
