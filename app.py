@@ -18,24 +18,12 @@ def index():
 @get('/artists')
 @view('artists/search')
 def artist_search():
-    return dict()
+    return {'results': None}
 
 
-@get('/artists/create')
-@view('artists/create')
-def artist_create():
-    return dict()
-
-
-@post('/artists/create')
-@view('artists/create')
-def artist_do_create():
-    return dict()
-
-
-@post('/artists/list')
-@view('artists/list')
-def artist_list():
+@post('/artists/search')
+@view('artists/search')
+def artist_do_search():
     name = request.forms.getunicode('name').strip()
     surname = request.forms.getunicode('surname').strip()
     yearfrom = request.forms.getunicode('yearfrom').strip()
@@ -77,6 +65,18 @@ def artist_list():
     cursor.execute(sql, args)
     results = cursor.fetchall()
     return {'results': results}
+
+
+@get('/artists/create')
+@view('artists/create')
+def artist_create():
+    return dict()
+
+
+@post('/artists/create')
+@view('artists/create')
+def artist_do_create():
+    return dict()
 
 
 @get('/artists/<id:int>')
