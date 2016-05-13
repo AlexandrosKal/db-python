@@ -1,5 +1,7 @@
 import os
-from bottle import get, post, run, static_file, view
+from urllib.parse import urlparse
+from bottle import get, post, request, run, static_file, view
+import pymysql.cursors
 
 
 @get('/static/<filepath:path>')
@@ -34,7 +36,47 @@ def artist_do_create():
 @post('/artists/list')
 @view('artists/list')
 def artist_list():
-    return dict()
+    name = request.forms.getunicode('name').strip()
+    surname = request.forms.getunicode('surname').strip()
+    yearfrom = request.forms.getunicode('yearfrom').strip()
+    yearto = request.forms.getunicode('yearto').strip()
+    tp = request.forms.getunicode('type').strip()
+
+    sql = """
+        SELECT DISTINCT
+            ar_taut, onoma, epitheto, etos_gen
+        FROM
+            kalitexnis
+    """
+    if tp == 'singer':
+        sql += ' CROSS JOIN singer_prod ON ar_taut = tragoudistis '
+    elif tp == 'songwriter':
+        sql += ' CROSS JOIN tragoudi ON ar_taut = stixourgos '
+    elif tp == 'composer':
+        sql += ' CROSS JOIN tragoudi ON ar_taut = sinthetis '
+
+    args = []
+    filters = []
+    if name:
+        args.append(name)
+        filters.append('onoma = %s')
+    if surname:
+        args.append(surname)
+        filters.append('epitheto = %s')
+    if yearfrom:
+        args.append(yearfrom)
+        filters.append('etos_gen >= %s')
+    if yearto:
+        args.append(yearto)
+        filters.append('etos_gen <= %s')
+
+    if args:
+        sql += ' WHERE ' + ' AND '.join(filters)
+
+    cursor = db.cursor()
+    cursor.execute(sql, args)
+    results = cursor.fetchall()
+    return {'results': results}
 
 
 @get('/artists/<id:int>')
@@ -86,4 +128,12 @@ def song_do_update(title):
 
 
 if __name__ == '__main__':
+    url = urlparse(os.environ.get('DATABASE_URL'))
+    db = pymysql.connect(host=url.hostname,
+                         user=url.username,
+                         password=url.password,
+                         db=url.path[1:],
+                         charset='utf8mb4',
+                         cursorclass=pymysql.cursors.DictCursor)
+
     run(host='0.0.0.0', port=os.environ.get('PORT', 8080))
