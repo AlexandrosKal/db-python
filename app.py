@@ -128,4 +128,12 @@ def song_do_update(title):
 
 
 if __name__ == '__main__':
+    url = urlparse(os.environ.get('DATABASE_URL'))
+    db = pymysql.connect(host=url.hostname,
+                         user=url.username,
+                         password=url.password,
+                         db=url.path[1:],
+                         charset='utf8mb4',
+                         cursorclass=pymysql.cursors.DictCursor)
+
     run(host='0.0.0.0', port=os.environ.get('PORT', 8080))
