@@ -12,7 +12,7 @@ def server_static(filepath):
 @get('/')
 @view('index')
 def index():
-    return dict()
+    return {}
 
 
 @get('/artists')
@@ -73,25 +73,25 @@ def artist_do_search():
 @get('/artists/create')
 @view('artists/create')
 def artist_create():
-    return dict()
+    return {}
 
 
 @post('/artists/create')
 @view('artists/create')
 def artist_do_create():
-    return dict()
+    return {}
 
 
 @get('/artists/<id:int>')
 @view('artists/update')
 def artist_update(id):
-    return dict()
+    return {}
 
 
 @post('/artists/<id:int>')
 @view('artists/update')
 def artist_do_update(id):
-    return dict()
+    return {}
 
 
 @get('/songs')
@@ -109,25 +109,25 @@ def song_do_search():
 @get('/songs/create')
 @view('songs/create')
 def song_create():
-    return dict()
+    return {}
 
 
 @post('/songs/create')
 @view('songs/create')
 def song_do_create():
-    return dict()
+    return {}
 
 
 @get('/songs/<title>')
 @view('songs/update')
 def song_update(title):
-    return dict()
+    return {}
 
 
 @post('/songs/<title>')
 @view('songs/update')
 def song_do_update(title):
-    return dict()
+    return {}
 
 
 if __name__ == '__main__':
