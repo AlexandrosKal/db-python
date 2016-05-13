@@ -4,13 +4,15 @@
   <div class="form-group">
     <label for="name" class="col-sm-2 control-label">Name</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="name" id="name" />
+      <input type="text" class="form-control" name="name" id="name"
+      value="{{request.get('name', '')}}" />
     </div>
   </div>
   <div class="form-group">
     <label for="surname" class="col-sm-2 control-label">Surname</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="surname" id="surname"/>
+      <input type="text" class="form-control" name="surname" id="surname"
+      value="{{request.get('surname', '')}}" />
     </div>
   </div>
   <div class="form-group">
@@ -18,13 +20,15 @@
       Birth Year - From
     </label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="yearfrom" id="yearfrom" />
+      <input type="text" class="form-control" name="yearfrom" id="yearfrom"
+      value="{{request.get('yearfrom', '')}}" />
     </div>
   </div>
   <div class="form-group">
     <label for="yearto" class="col-sm-2 control-label">Birth Year - To</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="yearto" id="yearto" />
+      <input type="text" class="form-control" name="yearto" id="yearto"
+      value="{{request.get('yearto', '')}}" />
     </div>
   </div>
   <div class="form-group">
@@ -32,19 +36,22 @@
     <div class="col-sm-10">
       <div class="radio">
         <label>
-          <input type="radio" name="type" value="singer" checked="checked" />
+          <input type="radio" name="type" value="singer"
+          {{!'checked="checked"' if request.get('type') == 'singer' else ''}} />
           Singer
         </label>
       </div>
       <div class="radio">
         <label>
-          <input type="radio" name="type" value="songwriter" />
+          <input type="radio" name="type" value="songwriter"
+          {{!'checked="checked"' if request.get('type') == 'songwriter' else ''}} />
           Songwriter
         </label>
       </div>
       <div class="radio">
         <label>
-          <input type="radio" name="type" value="composer" />
+          <input type="radio" name="type" value="composer"
+          {{!'checked="checked"' if request.get('type') == 'composer' else ''}} />
           Composer
         </label>
       </div>
@@ -57,7 +64,7 @@
   </div>
 </form>
 
-%if results:
+% if request:
 <h2 class="text-center">View Artist Results</h2>
 <div class="table-responsive">
   <table class="table table-hover">
@@ -71,30 +78,21 @@
       </tr>
     </thead>
     <tbody>
+% for row in results:
       <tr>
-        <td>1234</td>
-        <td>Mario</td>
-        <td>Saldinger</td>
-        <td>1996</td>
+        <td>{{row['ar_taut']}}</td>
+        <td>{{row['onoma']}}</td>
+        <td>{{row['epitheto']}}</td>
+        <td>{{row['etos_gen']}}</td>
         <td>
-          <a class="btn btn-default" href="artists/1234" role="button">
+          <a class="btn btn-default" href="artists/{{row['ar_taut']}}" role="button">
             Edit Me!
           </a>
         </td>
       </tr>
-      <tr>
-        <td>1235</td>
-        <td>Alexandros</td>
-        <td>Kalimeris</td>
-        <td>1996</td>
-        <td>
-          <a class="btn btn-default" href="artists/1235" role="button">
-            Edit Me!
-          </a>
-        </td>
-      </tr>
+% end
     </tbody>
   </table>
 </div>
-%end
+% end
 % include('footer.tpl')

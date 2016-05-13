@@ -16,19 +16,21 @@ def index():
 
 
 @get('/artists')
+@get('/artists/search')
 @view('artists/search')
 def artist_search():
-    return {'results': None}
+    return {'request': {}, 'results': {}}
 
 
+@post('/artists')
 @post('/artists/search')
 @view('artists/search')
 def artist_do_search():
-    name = request.forms.getunicode('name').strip()
-    surname = request.forms.getunicode('surname').strip()
-    yearfrom = request.forms.getunicode('yearfrom').strip()
-    yearto = request.forms.getunicode('yearto').strip()
-    tp = request.forms.getunicode('type').strip()
+    name = request.forms.getunicode('name', '').strip()
+    surname = request.forms.getunicode('surname', '').strip()
+    yearfrom = request.forms.getunicode('yearfrom', '').strip()
+    yearto = request.forms.getunicode('yearto', '').strip()
+    tp = request.forms.getunicode('type', '').strip()
 
     sql = """
         SELECT DISTINCT
@@ -64,7 +66,8 @@ def artist_do_search():
     cursor = db.cursor()
     cursor.execute(sql, args)
     results = cursor.fetchall()
-    return {'results': results}
+    return {'request': {'name': name, 'surname': surname, 'yearfrom': yearfrom,
+                        'yearto': yearto, 'type': tp}, 'results': results}
 
 
 @get('/artists/create')
