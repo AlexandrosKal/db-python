@@ -82,28 +82,79 @@ def artist_do_create():
     return {}
 
 
-@get('/artists/<id:int>')
+@get('/artists/<pid>')
 @view('artists/update')
 def artist_update(id):
     return {}
 
 
-@post('/artists/<id:int>')
+@post('/artists/<pid>')
 @view('artists/update')
-def artist_do_update(id):
-    return {}
+def artist_do_update(pid):
+    name = request.forms.getunicode('name').strip()
+    surname = request.forms.getunicode('surname').strip()
+    year = request.forms.getunicode('year').strip()
+
+    if name or surname or year:
+        sql = """
+            UPDATE
+                kalitexnis
+            SET
+                onoma = %s, epitheto = %s, etos_gen = %s
+            WHERE
+                ar_taut = "%s"
+
+        """
+        print(name, surname, year, pid)
+        print(sql)
+        cursor = db.cursor()
+        cursor.execute(sql, (name, surname, year, pid, ))
+        results = cursor.fetchall()
+        return {'results': results}
+    return dict()
 
 
 @get('/songs')
 @view('songs/search')
 def song_search():
-    return {'results': None}
+    return {'request': {}, 'results': {}}
 
 
 @post('/songs/search')
 @view('songs/search')
 def song_do_search():
-    return {'results': 'test'}
+    title = request.forms.getunicode('title').strip()
+    year = request.forms.getunicode('year').strip()
+    company = request.forms.getunicode('company').strip()
+    sql = """
+        SELECT
+            title, etos_par, cd, tragoudistis, stixourgos, sinthetis
+        FROM
+           tragoudi CROSS JOIN singer_prod ON title = titlos
+                    CROSS JOIN cd_production ON cd = code_cd
+    """
+    args = []
+    filters = []
+    if title:
+        args.append(title)
+        filters.append('title = %s')
+    if year:
+        args.append(year)
+        filters.append(' etos_par = %s')
+    if company:
+        args.append(company)
+        filters.append('etaireia = %s')
+
+    if args:
+        sql += ' WHERE ' + ' AND '.join(filters)
+
+    cursor = db.cursor()
+    cursor.execute(sql, args)
+    results = cursor.fetchall()
+    print(sql)
+    print(results)
+    return {'request': {'title': title, 'year': year, 'company': company},
+            'results': results}
 
 
 @get('/songs/create')
@@ -139,4 +190,5 @@ if __name__ == '__main__':
                          charset='utf8mb4',
                          cursorclass=pymysql.cursors.DictCursor)
 
-    run(host='0.0.0.0', port=os.environ.get('PORT', 8080))
+    run(host='0.0.0.0', port=os.environ.get('PORT', 8080), debug=True,
+        reloader=True)
