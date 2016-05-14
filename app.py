@@ -73,7 +73,7 @@ def artist_do_search():
 @get('/artists/create')
 @view('artists/create')
 def artist_create():
-    return {'request': {}, 'results': results}
+    return {'request': {}, 'results': {}}
 
 
 @post('/artists/create')
@@ -150,7 +150,6 @@ def song_search():
 @view('songs/search')
 def song_do_search():
     return {}
-
 
 
 @get('/songs/create')
