@@ -124,46 +124,18 @@ def artist_do_update(pid):
 
 
 @get('/songs')
+@get('/songs/search')
 @view('songs/search')
 def song_search():
     return {'request': {}, 'results': {}}
 
 
+@post('/songs')
 @post('/songs/search')
 @view('songs/search')
 def song_do_search():
-    title = request.forms.getunicode('title').strip()
-    year = request.forms.getunicode('year').strip()
-    company = request.forms.getunicode('company').strip()
-    sql = """
-        SELECT
-            title, etos_par, cd, tragoudistis, stixourgos, sinthetis
-        FROM
-           tragoudi CROSS JOIN singer_prod ON title = titlos
-                    CROSS JOIN cd_production ON cd = code_cd
-    """
-    args = []
-    filters = []
-    if title:
-        args.append(title)
-        filters.append('title = %s')
-    if year:
-        args.append(year)
-        filters.append(' etos_par = %s')
-    if company:
-        args.append(company)
-        filters.append('etaireia = %s')
+    return {}
 
-    if args:
-        sql += ' WHERE ' + ' AND '.join(filters)
-
-    cursor = db.cursor()
-    cursor.execute(sql, args)
-    results = cursor.fetchall()
-    print(sql)
-    print(results)
-    return {'request': {'title': title, 'year': year, 'company': company},
-            'results': results}
 
 
 @get('/songs/create')
