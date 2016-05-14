@@ -73,13 +73,28 @@ def artist_do_search():
 @get('/artists/create')
 @view('artists/create')
 def artist_create():
-    return {}
+    return {'request': {}, 'results': results}
 
 
 @post('/artists/create')
 @view('artists/create')
 def artist_do_create():
-    return {}
+    name = request.forms.getunicode('name', '').strip()
+    surname = request.forms.getunicode('surname', '').strip()
+    year = request.forms.getunicode('year', '').strip()
+
+    sql = """
+        INSERT INTO
+            kalitexnis
+        SET
+            onoma = %s, epitheto = %s, etos_gen = %s
+    """
+
+    cursor = db.cursor()
+    cursor.execute(sql, (name, surname, year,))
+    results = cursor.fetchall()
+    return {'request': {'name': name, 'surname': surname, 'year': year},
+            'results': results}
 
 
 @get('/artists/<pid>')
