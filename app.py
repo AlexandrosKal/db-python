@@ -103,27 +103,24 @@ def artist_update(pid):
 @post('/artists/<pid>')
 @view('artists/update')
 def artist_do_update(pid):
-    name = request.forms.getunicode('name').strip()
-    surname = request.forms.getunicode('surname').strip()
-    year = request.forms.getunicode('year').strip()
+    name = request.forms.getunicode('name', '').strip()
+    surname = request.forms.getunicode('surname', '').strip()
+    year = request.forms.getunicode('year', '').strip()
 
-    if name or surname or year:
-        sql = """
-            UPDATE
-                kalitexnis
-            SET
-                onoma = %s, epitheto = %s, etos_gen = %s
-            WHERE
-                ar_taut = "%s"
+    sql = """
+        UPDATE
+            kalitexnis
+        SET
+            onoma = %s, epitheto = %s, etos_gen = %s
+        WHERE
+            ar_taut = %s
+    """
 
-        """
-        print(name, surname, year, pid)
-        print(sql)
-        cursor = db.cursor()
-        cursor.execute(sql, (name, surname, year, pid, ))
-        results = cursor.fetchall()
-        return {'results': results}
-    return dict()
+    cursor = db.cursor()
+    cursor.execute(sql, (name, surname, year, pid,))
+    results = cursor.fetchall()
+    return {'request': {'name': name, 'surname': surname, 'year': year},
+            'results': results}
 
 
 @get('/songs')
