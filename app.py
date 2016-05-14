@@ -171,5 +171,4 @@ if __name__ == '__main__':
                          charset='utf8mb4',
                          cursorclass=pymysql.cursors.DictCursor)
 
-    run(host='0.0.0.0', port=os.environ.get('PORT', 8080), debug=True,
-        reloader=True)
+    run(host='0.0.0.0', port=os.environ.get('PORT', 8080))
