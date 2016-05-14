@@ -2,12 +2,6 @@
 <h1 class="text-center">Insert Artist</h1>
 <form class="form-horizontal" action="artists/create" method="post">
   <div class="form-group">
-    <label for="id" class="col-sm-2 control-label">National ID</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" name="id" id="id" />
-    </div>
-  </div>
-  <div class="form-group">
     <label for="name" class="col-sm-2 control-label">Name</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" name="name" id="name" />
