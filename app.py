@@ -73,37 +73,83 @@ def artist_do_search():
 @get('/artists/create')
 @view('artists/create')
 def artist_create():
-    return {}
+    return {'request': {}, 'results': {}}
 
 
 @post('/artists/create')
 @view('artists/create')
 def artist_do_create():
-    return {}
+    name = request.forms.getunicode('name', '').strip()
+    surname = request.forms.getunicode('surname', '').strip()
+    year = request.forms.getunicode('year', '').strip()
+
+    sql = """
+        INSERT INTO
+            kalitexnis
+        SET
+            onoma = %s, epitheto = %s, etos_gen = %s
+    """
+
+    cursor = db.cursor()
+    cursor.execute(sql, (name, surname, year,))
+    results = cursor.fetchall()
+    return {'request': {'name': name, 'surname': surname, 'year': year},
+            'results': results}
 
 
-@get('/artists/<id:int>')
+@get('/artists/<pid>')
 @view('artists/update')
-def artist_update(id):
-    return {}
+def artist_update(pid):
+    sql = """
+        SELECT
+            ar_taut, onoma, epitheto, etos_gen
+        FROM
+            kalitexnis
+        WHERE
+            ar_taut = %s
+    """
+
+    cursor = db.cursor()
+    cursor.execute(sql, (pid,))
+    results = cursor.fetchall()
+    return {'request': {}, 'results': results}
 
 
-@post('/artists/<id:int>')
+@post('/artists/<pid>')
 @view('artists/update')
-def artist_do_update(id):
-    return {}
+def artist_do_update(pid):
+    name = request.forms.getunicode('name', '').strip()
+    surname = request.forms.getunicode('surname', '').strip()
+    year = request.forms.getunicode('year', '').strip()
+
+    sql = """
+        UPDATE
+            kalitexnis
+        SET
+            onoma = %s, epitheto = %s, etos_gen = %s
+        WHERE
+            ar_taut = %s
+    """
+
+    cursor = db.cursor()
+    cursor.execute(sql, (name, surname, year, pid,))
+    results = cursor.fetchall()
+    return {'request': {'name': name, 'surname': surname, 'year': year},
+            'results': results}
 
 
 @get('/songs')
+@get('/songs/search')
 @view('songs/search')
 def song_search():
-    return {'results': None}
+    return {'request': {}, 'results': {}}
 
 
+@post('/songs')
 @post('/songs/search')
 @view('songs/search')
 def song_do_search():
-    return {'results': 'test'}
+    return {}
 
 
 @get('/songs/create')
