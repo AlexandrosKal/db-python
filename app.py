@@ -84,8 +84,20 @@ def artist_do_create():
 
 @get('/artists/<pid>')
 @view('artists/update')
-def artist_update(id):
-    return {}
+def artist_update(pid):
+    sql = """
+        SELECT
+            ar_taut, onoma, epitheto, etos_gen
+        FROM
+            kalitexnis
+        WHERE
+            ar_taut = %s
+    """
+
+    cursor = db.cursor()
+    cursor.execute(sql, (pid,))
+    results = cursor.fetchall()
+    return {'request': {}, 'results': results}
 
 
 @post('/artists/<pid>')
