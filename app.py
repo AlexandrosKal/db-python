@@ -73,28 +73,35 @@ def artist_do_search():
 @get('/artists/create')
 @view('artists/create')
 def artist_create():
-    return {'request': {}, 'results': {}}
+    return {'results': {}}
 
 
 @post('/artists/create')
 @view('artists/create')
 def artist_do_create():
+    pid = request.forms.getunicode('id', '').strip()
     name = request.forms.getunicode('name', '').strip()
     surname = request.forms.getunicode('surname', '').strip()
     year = request.forms.getunicode('year', '').strip()
 
-    sql = """
-        INSERT INTO
-            kalitexnis
-        SET
-            onoma = %s, epitheto = %s, etos_gen = %s
-    """
+    success = False
+    if pid:
+        sql = """
+            INSERT INTO
+                kalitexnis
+            SET
+                ar_taut = %s, onoma = %s, epitheto = %s, etos_gen = %s
+        """
 
-    cursor = db.cursor()
-    cursor.execute(sql, (name, surname, year,))
-    results = cursor.fetchall()
-    return {'request': {'name': name, 'surname': surname, 'year': year},
-            'results': results}
+        cursor = db.cursor()
+        try:
+            cursor.execute(sql, (pid, name, surname, year,))
+            success = cursor.rowcount == 1
+        except db.IntegrityError:
+            pass
+
+    return {'results': {'success': success, 'id': pid, 'name': name,
+                        'surname': surname, 'year': year}}
 
 
 @get('/artists/<pid>')
