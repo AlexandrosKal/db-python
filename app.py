@@ -99,8 +99,7 @@ def artist_do_create():
         except db.IntegrityError:
             pass
 
-    return {'results': {'success': success, 'id': pid, 'name': name,
-                        'surname': surname, 'year': year}}
+    return {'results': {'success': success}}
 
 
 @get('/artists/<pid>')
