@@ -5,14 +5,14 @@
     <label for="name" class="col-sm-2 control-label">Name</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" name="name" id="name"
-      value="{{request.get('name', '')}}" />
+             value="{{request.get('name', '')}}" />
     </div>
   </div>
   <div class="form-group">
     <label for="surname" class="col-sm-2 control-label">Surname</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" name="surname" id="surname"
-      value="{{request.get('surname', '')}}" />
+             value="{{request.get('surname', '')}}" />
     </div>
   </div>
   <div class="form-group">
@@ -21,14 +21,14 @@
     </label>
     <div class="col-sm-10">
       <input type="text" class="form-control" name="yearfrom" id="yearfrom"
-      value="{{request.get('yearfrom', '')}}" />
+             value="{{request.get('yearfrom', '')}}" />
     </div>
   </div>
   <div class="form-group">
     <label for="yearto" class="col-sm-2 control-label">Birth Year - To</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" name="yearto" id="yearto"
-      value="{{request.get('yearto', '')}}" />
+             value="{{request.get('yearto', '')}}" />
     </div>
   </div>
   <div class="form-group">
@@ -37,21 +37,21 @@
       <div class="radio">
         <label>
           <input type="radio" name="type" value="singer"
-          {{!'checked="checked"' if request.get('type') == 'singer' else ''}} />
+                 {{!'checked="checked"' if request.get('type') == 'singer' else ''}} />
           Singer
         </label>
       </div>
       <div class="radio">
         <label>
           <input type="radio" name="type" value="songwriter"
-          {{!'checked="checked"' if request.get('type') == 'songwriter' else ''}} />
+                 {{!'checked="checked"' if request.get('type') == 'songwriter' else ''}} />
           Songwriter
         </label>
       </div>
       <div class="radio">
         <label>
           <input type="radio" name="type" value="composer"
-          {{!'checked="checked"' if request.get('type') == 'composer' else ''}} />
+                 {{!'checked="checked"' if request.get('type') == 'composer' else ''}} />
           Composer
         </label>
       </div>
@@ -85,7 +85,8 @@
         <td>{{row['epitheto']}}</td>
         <td>{{row['etos_gen']}}</td>
         <td>
-          <a class="btn btn-default" href="artists/{{row['ar_taut']}}" role="button">
+          <a class="btn btn-default" href="artists/{{row['ar_taut']}}"
+             role="button">
             Edit Me!
           </a>
         </td>
