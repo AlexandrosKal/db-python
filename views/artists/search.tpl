@@ -1,6 +1,6 @@
 % include('header.tpl')
 <h1 class="text-center">Presentation of Artists</h1>
-<form class="form-horizontal" action="artists/search" method="post">
+<form class="form-horizontal" action="artists/search" method="get">
   <div class="form-group">
     <label for="name" class="col-sm-2 control-label">Name</label>
     <div class="col-sm-10">
