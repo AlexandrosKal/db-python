@@ -35,28 +35,19 @@
         <th>Title</th>
         <th>Production Year</th>
         <th>CD</th>
-        <th>Singer</th>
-        <th>Songwriter</th>
-        <th>Composer</th>
-        <th>Edit?</th>
       </tr>
     </thead>
     <tbody>
+% for row in results:
       <tr>
-        <td>Back to Black</td>
-        <td>2007</td>
-        <td>12</td>
-        <td>1234</td>
-        <td>5678</td>
-        <td>9123</td>
-        <td>
-          <a class="btn btn-default" href="songs/Back+to+Black" role="button">
-            Edit Me!
-          </a>
+        <td>{{row['title']}}</td>
+        <td>{{row['year']}}</td>
+        <td>{{row['company']}}</td>
         </td>
       </tr>
+% end
     </tbody>
   </table>
 </div>
-%end
+% end
 % include('footer.tpl')
