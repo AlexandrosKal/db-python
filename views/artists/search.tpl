@@ -81,9 +81,9 @@
 % for row in results:
       <tr>
         <td>{{row['id']}}</td>
-        <td>{{row['name']}}</td>
-        <td>{{row['surname']}}</td>
-        <td>{{row['year']}}</td>
+        <td>{{row['name'] or ''}}</td>
+        <td>{{row['surname'] or ''}}</td>
+        <td>{{row['year'] or ''}}</td>
         <td>
           <a class="btn btn-default" href="artists/{{row['id']}}"
              role="button">
