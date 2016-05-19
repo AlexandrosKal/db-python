@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+
     <base href="/" />
-    <meta charset="UTF-8" />
     <title>db-python</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <link rel="stylesheet" href="static/bootstrap.css" type="text/css" />
     <style>
       .table > tbody > tr > td {

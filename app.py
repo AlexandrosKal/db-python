@@ -102,7 +102,7 @@ def artist_do_create():
 def artist_update(pid):
     sql = """
         SELECT
-            ar_taut, onoma, epitheto, etos_gen
+            ar_taut AS id, onoma AS name, epitheto AS surname, etos_gen AS year
         FROM
             kalitexnis
         WHERE
@@ -111,8 +111,8 @@ def artist_update(pid):
 
     cursor = db.cursor()
     cursor.execute(sql, (pid,))
-    results = cursor.fetchall()
-    return {'request': {}, 'results': results}
+    results = cursor.fetchone() or {}
+    return {'results': results}
 
 
 @post('/artists/<pid>')
@@ -133,9 +133,9 @@ def artist_do_update(pid):
 
     cursor = db.cursor()
     cursor.execute(sql, (name, surname, year, pid,))
-    results = cursor.fetchall()
-    return {'request': {'name': name, 'surname': surname, 'year': year},
-            'results': results}
+    success = cursor.rowcount == 1
+    return {'results': {'success': success, 'id': pid, 'name': name,
+                        'surname': surname, 'year': year}}
 
 
 @get('/songs')
@@ -183,6 +183,7 @@ if __name__ == '__main__':
                          password=url.password,
                          db=url.path[1:],
                          charset='utf8mb4',
-                         cursorclass=pymysql.cursors.DictCursor)
+                         cursorclass=pymysql.cursors.DictCursor,
+                         autocommit=True)
 
     run(host='0.0.0.0', port=os.environ.get('PORT', 8080))
