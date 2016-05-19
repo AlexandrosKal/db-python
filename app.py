@@ -155,7 +155,37 @@ def song_search():
 @post('/songs/search')
 @view('songs/search')
 def song_do_search():
-    return {}
+    title = request.forms.getunicode('title', '').strip()
+    year = request.forms.getunicode('year', '').strip()
+    company = request.forms.getunicode('company', '').strip()
+
+    sql = """
+        SELECT DISTINCT
+            title, etaireia, etos_par
+        FROM
+            cd_production CROSS JOIN singer_prod ON code_cd = cd
+                          CROSS JOIN tragoudi ON title = titlos
+    """
+    args = []
+    filters = []
+    if title:
+        args.append(title)
+        filters.append('title = %s')
+    if year:
+        args.append(year)
+        filters.append('etos_par = %s')
+    if company:
+        args.append(company)
+        filters.append('etairia = %s')
+
+    if args:
+        sql += ' WHERE ' + ' AND '.join(filters)
+
+    cursor = db.cursor()
+    cursor.execute(sql, args)
+    results = cursor.fetchall()
+    return {'request': {'title': title, 'year': year, 'company': company,
+            results': results}
 
 
 @get('/songs/create')
