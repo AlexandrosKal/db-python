@@ -144,20 +144,13 @@ def artist_do_update(pid):
                         'surname': surname, 'year': year}}
 
 
+@post('/songs')
 @get('/songs')
 @get('/songs/search')
-@view('songs/search')
 def song_search():
-    return {'request': {}, 'results': {}}
-
-
-@post('/songs')
-@post('/songs/search')
-@view('songs/search')
-def song_do_search():
-    title = request.forms.getunicode('title', '').strip()
-    year = request.forms.getunicode('year', '').strip()
-    company = request.forms.getunicode('company', '').strip()
+    title = request.query.getunicode('title', '').strip()
+    year = request.query.getunicode('year', '').strip()
+    company = request.query.getunicode('company', '').strip()
 
     sql = """
         SELECT DISTINCT
@@ -184,8 +177,9 @@ def song_do_search():
     cursor = db.cursor()
     cursor.execute(sql, args)
     results = cursor.fetchall()
-    return {'request': {'title': title, 'year': year, 'company': company,
-            results': results}
+    data = {'title': title, 'year': year, 'company': company}
+
+    return {'request': data, 'results': results}
 
 
 @get('/songs/create')
