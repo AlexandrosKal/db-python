@@ -152,32 +152,35 @@ def song_search():
     year = request.query.getunicode('year', '').strip()
     company = request.query.getunicode('company', '').strip()
 
-    sql = """
-        SELECT DISTINCT
-            title, etaireia AS company, etos_par AS year
-        FROM
-            cd_production CROSS JOIN singer_prod ON code_cd = cd
-                          CROSS JOIN tragoudi ON title = titlos
-    """
-    args = []
-    filters = []
-    if title:
-        args.append(title)
-        filters.append('title = %s')
-    if year:
-        args.append(year)
-        filters.append('etos_par = %s')
-    if company:
-        args.append(company)
-        filters.append('etairia = %s')
+    data = {}
+    results = {}
+    if request.query.dict:
+        sql = """
+            SELECT DISTINCT
+                title, etaireia AS company, etos_par AS year
+            FROM
+                cd_production CROSS JOIN singer_prod ON code_cd = cd
+                              CROSS JOIN tragoudi ON title = titlos
+        """
+        args = []
+        filters = []
+        if title:
+            args.append(title)
+            filters.append('title = %s')
+        if year:
+            args.append(year)
+            filters.append('etos_par = %s')
+        if company:
+            args.append(company)
+            filters.append('etairia = %s')
 
-    if args:
-        sql += ' WHERE ' + ' AND '.join(filters)
+        if args:
+            sql += ' WHERE ' + ' AND '.join(filters)
 
-    cursor = db.cursor()
-    cursor.execute(sql, args)
-    results = cursor.fetchall()
-    data = {'title': title, 'year': year, 'company': company}
+        cursor = db.cursor()
+        cursor.execute(sql, args)
+        results = cursor.fetchall()
+        data = {'title': title, 'year': year, 'company': company}
 
     return {'request': data, 'results': results}
 
