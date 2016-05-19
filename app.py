@@ -45,11 +45,11 @@ def artist_search():
         args = []
         filters = []
         if name:
-            args.append(name)
-            filters.append('onoma = %s')
+            args.append(name + '%')
+            filters.append('onoma LIKE %s')
         if surname:
-            args.append(surname)
-            filters.append('epitheto = %s')
+            args.append(surname + '%')
+            filters.append('epitheto LIKE %s')
         if yearfrom:
             args.append(yearfrom)
             filters.append('etos_gen >= %s')
@@ -165,14 +165,14 @@ def song_search():
         args = []
         filters = []
         if title:
-            args.append(title)
-            filters.append('title = %s')
+            args.append(title + '%')
+            filters.append('title LIKE %s')
         if year:
             args.append(year)
             filters.append('etos_par = %s')
         if company:
-            args.append(company)
-            filters.append('etaireia = %s')
+            args.append(company + '%')
+            filters.append('etaireia LIKE %s')
 
         if args:
             sql += ' WHERE ' + ' AND '.join(filters)
