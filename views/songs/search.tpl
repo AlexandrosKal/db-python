@@ -4,19 +4,22 @@
   <div class="form-group">
     <label for="title" class="col-sm-2 control-label">Title</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="title" id="title" />
+      <input type="text" class="form-control" name="title" id="title"
+             value="{{request.get('title', '')}}" />
     </div>
   </div>
   <div class="form-group">
     <label for="year" class="col-sm-2 control-label">Production Year</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="year" id="year"/>
+      <input type="text" class="form-control" name="year" id="year"
+             value="{{request.get('year', '')}}" />
     </div>
   </div>
   <div class="form-group">
     <label for="company" class="col-sm-2 control-label">Company</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="company" id="company" />
+      <input type="text" class="form-control" name="company" id="company"
+             value="{{request.get('company', '')}}" />
     </div>
   </div>
   <div class="form-group">
@@ -26,7 +29,7 @@
   </div>
 </form>
 
-%if results:
+% if request:
 <h2 class="text-center">View Song Results</h2>
 <div class="table-responsive">
   <table class="table table-hover">
@@ -34,29 +37,19 @@
       <tr>
         <th>Title</th>
         <th>Production Year</th>
-        <th>CD</th>
-        <th>Singer</th>
-        <th>Songwriter</th>
-        <th>Composer</th>
-        <th>Edit?</th>
+        <th>Company</th>
       </tr>
     </thead>
     <tbody>
+% for row in results:
       <tr>
-        <td>Back to Black</td>
-        <td>2007</td>
-        <td>12</td>
-        <td>1234</td>
-        <td>5678</td>
-        <td>9123</td>
-        <td>
-          <a class="btn btn-default" href="songs/Back+to+Black" role="button">
-            Edit Me!
-          </a>
-        </td>
+        <td>{{row['title']}}</td>
+        <td>{{row['year']}}</td>
+        <td>{{row['company']}}</td>
       </tr>
+% end
     </tbody>
   </table>
 </div>
-%end
+% end
 % include('footer.tpl')
