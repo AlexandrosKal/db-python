@@ -161,7 +161,7 @@ def song_do_search():
 
     sql = """
         SELECT DISTINCT
-            title, etaireia, etos_par
+            title, etaireia AS company, etos_par AS year
         FROM
             cd_production CROSS JOIN singer_prod ON code_cd = cd
                           CROSS JOIN tragoudi ON title = titlos
