@@ -34,7 +34,7 @@ def artist_do_search():
 
     sql = """
         SELECT DISTINCT
-            ar_taut, onoma, epitheto, etos_gen
+            ar_taut AS id, onoma AS name, epitheto AS surname, etos_gen AS year
         FROM
             kalitexnis
     """

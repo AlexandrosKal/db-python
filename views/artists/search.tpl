@@ -80,12 +80,12 @@
     <tbody>
 % for row in results:
       <tr>
-        <td>{{row['ar_taut']}}</td>
-        <td>{{row['onoma']}}</td>
-        <td>{{row['epitheto']}}</td>
-        <td>{{row['etos_gen']}}</td>
+        <td>{{row['id']}}</td>
+        <td>{{row['name']}}</td>
+        <td>{{row['surname']}}</td>
+        <td>{{row['year']}}</td>
         <td>
-          <a class="btn btn-default" href="artists/{{row['ar_taut']}}"
+          <a class="btn btn-default" href="artists/{{row['id']}}"
              role="button">
             Edit Me!
           </a>
