@@ -44,8 +44,8 @@
 % for row in results:
       <tr>
         <td>{{row['title']}}</td>
-        <td>{{row['year']}}</td>
-        <td>{{row['company']}}</td>
+        <td>{{row['year'] or ''}}</td>
+        <td>{{row['company'] or ''}}</td>
       </tr>
 % end
     </tbody>
