@@ -148,14 +148,41 @@ def artist_do_update(pid):
 @get('/songs/search')
 @view('songs/search')
 def song_search():
-    return {'request': {}, 'results': {}}
+    title = request.query.getunicode('title', '').strip()
+    year = request.query.getunicode('year', '').strip()
+    company = request.query.getunicode('company', '').strip()
 
+    data = {}
+    results = {}
+    if request.query.dict:
+        sql = """
+            SELECT DISTINCT
+                title, etaireia AS company, etos_par AS year
+            FROM
+                cd_production CROSS JOIN singer_prod ON code_cd = cd
+                              CROSS JOIN tragoudi ON title = titlos
+        """
+        args = []
+        filters = []
+        if title:
+            args.append(title)
+            filters.append('title = %s')
+        if year:
+            args.append(year)
+            filters.append('etos_par = %s')
+        if company:
+            args.append(company)
+            filters.append('etaireia = %s')
 
-@post('/songs')
-@post('/songs/search')
-@view('songs/search')
-def song_do_search():
-    return {}
+        if args:
+            sql += ' WHERE ' + ' AND '.join(filters)
+
+        cursor = db.cursor()
+        cursor.execute(sql, args)
+        results = cursor.fetchall()
+        data = {'title': title, 'year': year, 'company': company}
+
+    return {'request': data, 'results': results}
 
 
 @get('/songs/create')
@@ -167,18 +194,6 @@ def song_create():
 @post('/songs/create')
 @view('songs/create')
 def song_do_create():
-    return {}
-
-
-@get('/songs/<title>')
-@view('songs/update')
-def song_update(title):
-    return {}
-
-
-@post('/songs/<title>')
-@view('songs/update')
-def song_do_update(title):
     return {}
 
 
