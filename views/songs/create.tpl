@@ -17,8 +17,9 @@
     <label for="cd" class="col-sm-2 control-label">CD</label>
     <div class="col-sm-10">
       <select class="form-control" name="cd" id="cd">
-        <option value="5678">5678</option>
-        <option value="5679">5679</option>
+% for cd in results.cds
+        <option value="{{cd.cd}}">{{cd.cd}}</option>
+% end
       </select>
     </div>
   </div>
@@ -26,8 +27,9 @@
     <label for="singer" class="col-sm-2 control-label">Singer</label>
     <div class="col-sm-10">
       <select class="form-control" name="singer" id="singer">
-        <option value="1234">1234</option>
-        <option value="1235">1235</option>
+% for artist in results.artists
+        <option value="{{artist.id}}">{{artist.id}}</option>
+% end
       </select>
     </div>
   </div>
@@ -35,8 +37,9 @@
     <label for="songwriter" class="col-sm-2 control-label">Songwriter</label>
     <div class="col-sm-10">
       <select class="form-control" name="songwriter" id="songwriter">
-        <option value="1234">1234</option>
-        <option value="1235">1235</option>
+% for artist in results.artists
+        <option value="{{artist.id}}">{{artist.id}}</option>
+% end
       </select>
     </div>
   </div>
@@ -44,8 +47,9 @@
     <label for="composer" class="col-sm-2 control-label">Composer</label>
     <div class="col-sm-10">
       <select class="form-control" name="composer" id="composer">
-        <option value="1234">1234</option>
-        <option value="1235">1235</option>
+% for artist in results.artists
+        <option value="{{artist.id}}">{{artist.id}}</option>
+% end
       </select>
     </div>
   </div>
@@ -55,4 +59,14 @@
     </div>
   </div>
 </form>
+
+% if results.get('success'):
+<div class="center-block bg-success text-center">
+  Inserted!
+</div>
+% elif results.get('success') is not None:
+<div class="center-block bg-warning text-center">
+  Not inserted!
+</div>
+% end
 % include('footer.tpl')
