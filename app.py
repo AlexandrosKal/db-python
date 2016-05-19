@@ -19,55 +19,54 @@ def index():
 @get('/artists/search')
 @view('artists/search')
 def artist_search():
-    return {'request': {}, 'results': {}}
+    name = request.query.getunicode('name', '').strip()
+    surname = request.query.getunicode('surname', '').strip()
+    yearfrom = request.query.getunicode('yearfrom', '').strip()
+    yearto = request.query.getunicode('yearto', '').strip()
+    tp = request.query.getunicode('type', '').strip()
 
+    data = {}
+    results = {}
+    if name or surname or yearfrom or yearto or tp:
+        sql = """
+            SELECT DISTINCT
+                ar_taut AS id, onoma AS name, epitheto AS surname,
+                etos_gen AS year
+            FROM
+                kalitexnis
+        """
+        if tp == 'singer':
+            sql += ' CROSS JOIN singer_prod ON ar_taut = tragoudistis '
+        elif tp == 'songwriter':
+            sql += ' CROSS JOIN tragoudi ON ar_taut = stixourgos '
+        elif tp == 'composer':
+            sql += ' CROSS JOIN tragoudi ON ar_taut = sinthetis '
 
-@post('/artists')
-@post('/artists/search')
-@view('artists/search')
-def artist_do_search():
-    name = request.forms.getunicode('name', '').strip()
-    surname = request.forms.getunicode('surname', '').strip()
-    yearfrom = request.forms.getunicode('yearfrom', '').strip()
-    yearto = request.forms.getunicode('yearto', '').strip()
-    tp = request.forms.getunicode('type', '').strip()
+        args = []
+        filters = []
+        if name:
+            args.append(name)
+            filters.append('onoma = %s')
+        if surname:
+            args.append(surname)
+            filters.append('epitheto = %s')
+        if yearfrom:
+            args.append(yearfrom)
+            filters.append('etos_gen >= %s')
+        if yearto:
+            args.append(yearto)
+            filters.append('etos_gen <= %s')
 
-    sql = """
-        SELECT DISTINCT
-            ar_taut AS id, onoma AS name, epitheto AS surname, etos_gen AS year
-        FROM
-            kalitexnis
-    """
-    if tp == 'singer':
-        sql += ' CROSS JOIN singer_prod ON ar_taut = tragoudistis '
-    elif tp == 'songwriter':
-        sql += ' CROSS JOIN tragoudi ON ar_taut = stixourgos '
-    elif tp == 'composer':
-        sql += ' CROSS JOIN tragoudi ON ar_taut = sinthetis '
+        if args:
+            sql += ' WHERE ' + ' AND '.join(filters)
 
-    args = []
-    filters = []
-    if name:
-        args.append(name)
-        filters.append('onoma = %s')
-    if surname:
-        args.append(surname)
-        filters.append('epitheto = %s')
-    if yearfrom:
-        args.append(yearfrom)
-        filters.append('etos_gen >= %s')
-    if yearto:
-        args.append(yearto)
-        filters.append('etos_gen <= %s')
+        cursor = db.cursor()
+        cursor.execute(sql, args)
+        data = {'name': name, 'surname': surname, 'yearfrom': yearfrom,
+                'yearto': yearto}
+        results = cursor.fetchall()
 
-    if args:
-        sql += ' WHERE ' + ' AND '.join(filters)
-
-    cursor = db.cursor()
-    cursor.execute(sql, args)
-    results = cursor.fetchall()
-    return {'request': {'name': name, 'surname': surname, 'yearfrom': yearfrom,
-                        'yearto': yearto, 'type': tp}, 'results': results}
+    return {'request': data, 'results': results}
 
 
 @get('/artists/create')
