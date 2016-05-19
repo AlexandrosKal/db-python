@@ -17,8 +17,8 @@
     <label for="cd" class="col-sm-2 control-label">CD</label>
     <div class="col-sm-10">
       <select class="form-control" name="cd" id="cd">
-% for cd in results.cds
-        <option value="{{cd.cd}}">{{cd.cd}}</option>
+% for cd in results['cds']:
+        <option value="{{cd['cd']}}">{{cd['cd']}}</option>
 % end
       </select>
     </div>
@@ -27,8 +27,8 @@
     <label for="singer" class="col-sm-2 control-label">Singer</label>
     <div class="col-sm-10">
       <select class="form-control" name="singer" id="singer">
-% for artist in results.artists
-        <option value="{{artist.id}}">{{artist.id}}</option>
+% for artist in results['artists']:
+        <option value="{{artist['id']}}">{{artist['id']}}</option>
 % end
       </select>
     </div>
@@ -37,8 +37,8 @@
     <label for="songwriter" class="col-sm-2 control-label">Songwriter</label>
     <div class="col-sm-10">
       <select class="form-control" name="songwriter" id="songwriter">
-% for artist in results.artists
-        <option value="{{artist.id}}">{{artist.id}}</option>
+% for artist in results['artists']:
+        <option value="{{artist['id']}}">{{artist['id']}}</option>
 % end
       </select>
     </div>
@@ -47,8 +47,8 @@
     <label for="composer" class="col-sm-2 control-label">Composer</label>
     <div class="col-sm-10">
       <select class="form-control" name="composer" id="composer">
-% for artist in results.artists
-        <option value="{{artist.id}}">{{artist.id}}</option>
+% for artist in results['artists']:
+        <option value="{{artist['id']}}">{{artist['id']}}</option>
 % end
       </select>
     </div>

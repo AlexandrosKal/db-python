@@ -188,13 +188,81 @@ def song_search():
 @get('/songs/create')
 @view('songs/create')
 def song_create():
-    return {}
+    cursor = db.cursor()
+    cursor.execute("""
+        SELECT
+            cd
+        FROM
+            singer_prod
+    """)
+    cds = cursor.fetchall()
+
+    cursor.execute("""
+        SELECT
+            ar_taut AS id
+        FROM
+            kalitexnis
+    """)
+    artists = cursor.fetchall()
+
+    return {'results': {'cds': cds, 'artists': artists}}
 
 
 @post('/songs/create')
 @view('songs/create')
 def song_do_create():
-    return {}
+    title = request.forms.getunicode('title', '').strip()
+    year = request.forms.getunicode('year', '').strip()
+    cd = request.forms.getunicode('cd', '').strip()
+    singer = request.forms.getunicode('singer', '').strip()
+    songwriter = request.forms.getunicode('songwriter', '').strip()
+    composer = request.forms.getunicode('composer', '').strip()
+
+    cursor = db.cursor()
+    cursor.execute("""
+        SELECT
+            cd
+        FROM
+            singer_prod
+    """)
+    cds = cursor.fetchall()
+
+    cursor.execute("""
+        SELECT
+            ar_taut AS id
+        FROM
+            kalitexnis
+    """)
+    artists = cursor.fetchall()
+
+    success = False
+    if title:
+        sql = """
+            INSERT INTO
+                tragoudi
+            SET
+                titlos = %s, sinthetis = %s, etos_par = %s, stixourgos = %s
+        """
+
+        try:
+            cursor.execute(sql, (title, composer, year, songwriter,))
+        except db.IntegrityError:
+            pass
+
+        sql = """
+            INSERT INTO
+                singer_prod
+            SET
+                cd = %s, tragoudistis = %s, title = %s
+        """
+
+        try:
+            cursor.execute(sql, (cd, singer, title,))
+            success = cursor.rowcount == 1
+        except db.IntegrityError:
+            pass
+
+    return {'results': {'cds': cds, 'artists': artists, 'success': success}}
 
 
 if __name__ == '__main__':
