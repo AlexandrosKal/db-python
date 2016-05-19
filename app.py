@@ -27,7 +27,7 @@ def artist_search():
 
     data = {}
     results = {}
-    if name or surname or yearfrom or yearto or tp:
+    if request.query.dict:
         sql = """
             SELECT DISTINCT
                 ar_taut AS id, onoma AS name, epitheto AS surname,
