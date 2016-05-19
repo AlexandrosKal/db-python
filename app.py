@@ -144,9 +144,9 @@ def artist_do_update(pid):
                         'surname': surname, 'year': year}}
 
 
-@post('/songs')
 @get('/songs')
 @get('/songs/search')
+@view('songs/search')
 def song_search():
     title = request.query.getunicode('title', '').strip()
     year = request.query.getunicode('year', '').strip()
@@ -172,7 +172,7 @@ def song_search():
             filters.append('etos_par = %s')
         if company:
             args.append(company)
-            filters.append('etairia = %s')
+            filters.append('etaireia = %s')
 
         if args:
             sql += ' WHERE ' + ' AND '.join(filters)
@@ -194,18 +194,6 @@ def song_create():
 @post('/songs/create')
 @view('songs/create')
 def song_do_create():
-    return {}
-
-
-@get('/songs/<title>')
-@view('songs/update')
-def song_update(title):
-    return {}
-
-
-@post('/songs/<title>')
-@view('songs/update')
-def song_do_update(title):
     return {}
 
 
