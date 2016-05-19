@@ -4,29 +4,25 @@
   <div class="form-group">
     <label for="id" class="col-sm-2 control-label">National ID</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="id" id="id"
-             value="{{results.get('id', '')}}" />
+      <input type="text" class="form-control" name="id" id="id" />
     </div>
   </div>
   <div class="form-group">
     <label for="name" class="col-sm-2 control-label">Name</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="name" id="name"
-             value="{{results.get('name', '')}}" />
+      <input type="text" class="form-control" name="name" id="name" />
     </div>
   </div>
   <div class="form-group">
     <label for="surname" class="col-sm-2 control-label">Surname</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="surname" id="surname"
-             value="{{results.get('surname', '')}}" />
+      <input type="text" class="form-control" name="surname" id="surname" />
     </div>
   </div>
   <div class="form-group">
     <label for="year" class="col-sm-2 control-label">Birth Year</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="year" id="year"
-             value="{{results.get('year', '')}}" />
+      <input type="text" class="form-control" name="year" id="year" />
     </div>
   </div>
   <div class="form-group">
