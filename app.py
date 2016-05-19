@@ -1,5 +1,5 @@
 import os
-from urllib.parse import urlparse
+import urlparse
 from bottle import get, post, request, run, static_file, view
 import pymysql.cursors
 
@@ -265,7 +265,7 @@ def song_do_create():
 
 
 if __name__ == '__main__':
-    url = urlparse(os.environ.get('DATABASE_URL'))
+    url = urlparse.urlparse(os.environ.get('DATABASE_URL'))
     db = pymysql.connect(host=url.hostname,
                          user=url.username,
                          password=url.password,
