@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 5.5.49, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13 Distrib 5.5.49, for debian-linux-gnu (x86_64)
 --
 -- Host: edudb.di.uoa.gr    Database: songs
 -- ------------------------------------------------------
@@ -7,7 +7,7 @@
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,7 +21,7 @@
 
 DROP TABLE IF EXISTS `cd_production`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cd_production` (
   `code_cd` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `etaireia` varchar(45) CHARACTER SET utf8mb4 NOT NULL,
@@ -46,7 +46,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `group_prod`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `group_prod` (
   `cd` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `group` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -76,7 +76,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `kalitexnis`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `kalitexnis` (
   `ar_taut` char(8) COLLATE utf8mb4_unicode_ci NOT NULL,
   `onoma` varchar(36) CHARACTER SET utf8mb4 DEFAULT NULL,
@@ -102,7 +102,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `sigrotima`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `sigrotima` (
   `onoma` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
   `im_dimiourgias` int(10) unsigned NOT NULL,
@@ -126,7 +126,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `singer_prod`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `singer_prod` (
   `cd` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `tragoudistis` char(8) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
@@ -156,7 +156,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tragoudi`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tragoudi` (
   `titlos` varchar(60) CHARACTER SET utf8mb4 NOT NULL,
   `sinthetis` char(8) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
