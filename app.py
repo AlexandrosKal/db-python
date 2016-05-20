@@ -1,3 +1,6 @@
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+
 import os
 import urlparse
 from bottle import get, post, request, run, static_file, view
