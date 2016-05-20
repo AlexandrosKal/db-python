@@ -66,7 +66,7 @@ def artist_search():
         cursor = db.cursor()
         cursor.execute(sql, args)
         data = {'name': name, 'surname': surname, 'yearfrom': yearfrom,
-                'yearto': yearto}
+                'yearto': yearto, 'type': tp}
         results = cursor.fetchall()
 
     return {'request': data, 'results': results}
