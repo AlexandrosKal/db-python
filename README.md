@@ -31,7 +31,7 @@ source etc/dump.sql;
 ## Configuration
 
 ```sh
-echo "DATABASE_URL='mysql://user:password@host/database'" >> .env
+echo "DATABASE_URL='mysql://user:password@host:port/database'" >> .env
 echo 'PORT=8080' >> .env  # Optional. [Default: 8080]
 ```
 
