@@ -272,6 +272,7 @@ if __name__ == '__main__':
     db = pymysql.connect(host=url.hostname,
                          user=url.username,
                          password=url.password,
+                         port=url.port,
                          db=url.path[1:],
                          charset='utf8mb4',
                          cursorclass=pymysql.cursors.DictCursor,
