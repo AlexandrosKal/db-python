@@ -32,11 +32,13 @@ source etc/dump.sql;
 
 ```sh
 echo "DATABASE_URL='mysql://user:password@host/database'" >> .env
+echo 'PORT=8080' >> .env  # Optional. [Default: 8080]
 ```
 
 ## Execution
 
 ```sh
+export $(cat .env)
 ./app.py
 ```
 
