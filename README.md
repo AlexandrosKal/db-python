@@ -38,7 +38,7 @@ echo 'PORT=8080' >> .env  # Optional. [Default: 8080]
 ## Execution
 
 ```sh
-export $(cat .env)
+export $(cat .env | xargs)
 ./app.py
 ```
 
